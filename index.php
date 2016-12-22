@@ -1,3 +1,15 @@
+<?php 
+session_start();
+$n = 1;
+if(isset($_SESSION['errorlog'])){
+	$opacity = 1;
+}
+else{
+	$opacity = 0;
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +22,7 @@
 		<h1>Form</h1>
 		<div class="line"></div>
 
-		<form method="POST" action="output.php">
+		<form method="POST" action="process.php">
 			<h3>Personal Information</h3>
 			<table>
 			<tr align="">
@@ -42,7 +54,7 @@
 		 		<input type="text" name="mom" placeholder="Mother's Name"><br>
 				</td>
 
-				<td width="50%">
+				<td width="50%" style="padding-left: 20px; !important">
 				
 		 		<textarea type="text" name="address" placeholder="Home Address"></textarea>
 		 		<input type="text" name="nation" placeholder="Nationality"><br>
@@ -71,7 +83,7 @@
 	 		<input type="text" name="award" placeholder="Award Received">	
 		 </td>
 
-		 <td width="50%" valign="top">
+		 <td width="50%" valign="top" style="padding-left: 20px; !important">
 	 		<input type="text" name="company" placeholder="Company name"><br>
 	 		<table>
 	 		<tr>
@@ -92,15 +104,26 @@
 		  <td width="50%">
 	 		<h3>Certificates and Trainings</h3>
 	 		<input type="text" name="train" placeholder="Name of Training"><br>
-	 		<label>Training Date </label><input type="date" name="dtrain" placeholder="Date of Training">					
+	 		<label>Training Date </label><input type="date" name="dtrain" placeholder="Date of Training">	
 		  </td>
-		  <td width="50%">
+
+		  <td width="50%" valign="bottom" align="center" style="padding-left: 20px; !important">
 			<input type="submit" name="submit" value="Submit Form">	
 		  </td>
 		 </tr>
 		</table>
 
 	 	</form>
+	 	<div class="error" style="opacity: <?php echo $opacity; ?>">
+	 		<p>
+	 		<?php 
+	 		foreach ($_SESSION['errorlog'] as $k) {
+	 			echo 'Error '.$n.': '.$k.'<br>';
+	 			$n++;
+	 		}
+	 		?>
+	 		</p>
+	 	</div>
 	</div>
  	
 </body>
