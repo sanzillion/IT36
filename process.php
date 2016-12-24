@@ -2,6 +2,7 @@
 
 session_start();
 $arr = [];
+$err = [];
 
 if(isset($_POST['submit'])){
 	$lname = $_POST['lname']; 		$fb = $_POST['fb'];
@@ -17,14 +18,19 @@ if(isset($_POST['submit'])){
 	$nation = $_POST['nation']; 	$email = $_POST['email'];
 	$cnum = $_POST['cnum']; 
 
-	if(preg_match('/\W/', $lname)
-		|| preg_match('/[^a-z]\s/i', $lname)
-		|| preg_match('/\d/', $lname)
-		|| strlen($lname) < 2
-		|| empty($lname) ){
-		$arr[] = "Invalid! You know what a lastname is! tsk!";
-		$er1 = "lname";
+	if(checkname($lname)){
+		$arr[] = "Invalid Last Name: Type a name correctly";
+		$err[] = "lname";
 	}
+	if(checkname($gname)){
+		$arr[] = "Invalid Given Name: Type a name correctly";
+		$err[] = "gname";
+	}
+	if(checkname($mname)){
+		$arr[] = "Invalid Middle Name: Type a name correctly";
+		$err[] = "mname";
+	}
+	
 	if(!filter_var($int, FILTER_VALIDATE_INT)){
 		echo "Whatever";
 	}
@@ -45,15 +51,19 @@ print_r($_SESSION['errorlog']);
 $name = "SANZ MOSES";
 echo '<br>'.strlen($name);
 echo '<br>'.$name.'<br>';
-if(preg_match('/\W/', $lname)
-		|| preg_match('/[^a-z]\s/i', $lname)
-		|| preg_match('/\d/', $lname)
-		|| strlen($lname) < 2
-		|| empty($lname) ){
-	echo "Infuckingvalid";
+
+funtion checkname($var){
+	if(preg_match('/\W/', $var)
+		|| preg_match('/[^a-z]\s/i', $var)
+		|| preg_match('/\d/', $var)
+		|| strlen($var) < 2
+		|| empty($var) ){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
-else{
-	echo "Valid";
-}
+
  //header('Location: index.php');
  ?>
