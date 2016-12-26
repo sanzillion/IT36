@@ -18,6 +18,9 @@ if(isset($_POST['submit'])){
 	$nation = $_POST['nation']; 	$email = $_POST['email'];
 	$cnum = $_POST['cnum']; 
 
+    $bmonth = $bmonth.'-'.$byr;
+	$bmonth = date('m', strtotime($bmonth));
+
 	if(checkname($lname)){
 		$arr[] = "Invalid Last Name: Type a name correctly";
 		$err[] = "lname";
@@ -30,29 +33,24 @@ if(isset($_POST['submit'])){
 		$arr[] = "Invalid Middle Name: Type a name correctly";
 		$err[] = "mname";
 	}
-	
-	if(!filter_var($int, FILTER_VALIDATE_INT)){
-		echo "Whatever";
+	if(!checkdate($bmonth, $bdate, $byr)){
+		$arr[] = "Invalid Birth Date";
+		$err[] = "B-date";
+		$err[] = "B-month";
+		$err[] = "B-yr";
+	}
+
+
+
+	if(!filter_var($email, FILTER_VALIDATE_INT)){
+		$arr[] = "Invalid Email";
+		$err[] = "email";
 	}
 
 
 }
 
-$arr[] = "waher";
-$arr[] = "who";
-$arr[] = "ye";
-
-$_SESSION['errorlog'] = $arr;
-
-print_r($arr);
-
-print_r($_SESSION['errorlog']);
-
-$name = "SANZ MOSES";
-echo '<br>'.strlen($name);
-echo '<br>'.$name.'<br>';
-
-funtion checkname($var){
+function checkname($var){
 	if(preg_match('/\W/', $var)
 		|| preg_match('/[^a-z]\s/i', $var)
 		|| preg_match('/\d/', $var)
@@ -65,5 +63,6 @@ funtion checkname($var){
 	}
 }
 
+print_r($err);
  //header('Location: index.php');
  ?>

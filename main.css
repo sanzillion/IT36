@@ -57,8 +57,20 @@ input[type="date"]{
 	padding-left: 5px;
 	border: 1px solid #CCD1D1;
 }
-
-input[name="mstatus"]{
+select[name="mstatus"]{
+	margin-top: 5px;
+	width: 170px;
+}
+select[name="b-yr"]{
+	width: 70px;
+}
+select[name="b-month"]{
+	width: 65px;
+}
+select[name="b-date"]{
+	width: 40px;
+}
+input[name="dad"]{
 	margin-top: 5px;
 }
 input[name="award"]{
