@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+if(isset($_SESSION['sub'])){
+	if($_SESSION['sub'] == 1 && isset($_SESSION['return'][0])){
+		$_SESSION['return'];
+	}
+	else{
+		$_SESSION['sub'] == 0;
+	}
+}
 $n = 1;
 if(isset($_SESSION['errorlog'])){
 	$opacity = 1;
@@ -27,11 +36,23 @@ else{
 			<table>
 			<tr align="">
 				<td width="50%">
-				<input type="text" name="lname" placeholder="Last Name"><br>
-		 		<input type="text" name="gname" placeholder="Given Name"><br>
-		 		<input type="text" name="mname" placeholder="Middle name"><br>
+				<input type="text" name="lname" placeholder="Last Name"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][0]))
+				{ echo $_SESSION['return'][0]; }  ?>"><br>
+		 		<input type="text" name="gname" placeholder="Given Name"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][1]))
+				{ echo $_SESSION['return'][1]; }  ?>"><br>
+		 		<input type="text" name="mname" placeholder="Middle name"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][2]))
+				{ echo $_SESSION['return'][2]; }  ?>"><br>
 		 		<label>Birthdate</label>
-		 		<select name="b-month"
+		 		<select name="b-month">
+					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+					&& isset($_SESSION['return'][3]))
+					{ echo '<option>'.$_SESSION['return'][3].'</option>'; }  ?>
 		 			<option>Jan</option><option>Feb</option>
 		 			<option>Mar</option><option>Apr</option>
 		 			<option>May</option><option>Jun</option>
@@ -40,34 +61,64 @@ else{
 		 			<option>Nov</option><option>Dec</option>
 		 		</select>
 		 		<select name="b-date">
+					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+					&& isset($_SESSION['return'][4]))
+					{ echo '<option>'.$_SESSION['return'][4].'</option>'; }  ?>
 		 			<?php for ($i= 1; $i <= 31; $i++) {
 		 				echo '<option>'.$i.'</option>';
 		 			} ?>
 		 		</select>
 		 		<select name="b-yr">
+					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+					&& isset($_SESSION['return'][5]))
+					{ echo '<option>'.$_SESSION['return'][5].'</option>'; }  ?>
 		 			<?php for ($i=1945; $i <= 2000; $i++) {
 		 				echo '<option>'.$i.'</option>';
 		 			} ?>
 		 		</select> <br>
 		 		<label>Civil Status</label>
 		 		<select name="mstatus">
+					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+					&& isset($_SESSION['return'][6]))
+					{ echo '<option>'.$_SESSION['return'][6].'</option>'; }  ?>
 		 			<option>Single</option>
 		 			<option>Married</option>
 		 			<option>Separated</option>
 		 			<option>Divorced</option>
 		 			<option>Widowed</option>
 		 		</select><br>
-		 		<input type="text" name="dad" placeholder="Father's Name"><br>
-		 		<input type="text" name="mom" placeholder="Mother's Name"><br>
+		 		<input type="text" name="dad" placeholder="Father's Name"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][7]))
+				{ echo $_SESSION['return'][7]; }  ?>"><br>
+		 		<input type="text" name="mom" placeholder="Mother's Name"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][8]))
+				{ echo $_SESSION['return'][8]; }  ?>"><br>
 				</td>
 
 				<td width="50%" style="padding-left: 20px; !important">
 
-		 		<textarea type="text" name="address" placeholder="Home Address"></textarea>
-		 		<input type="text" name="nation" placeholder="Nationality"><br>
-		 		<input type="text" name="cnum" placeholder="Contact Number"><br>
-		 		<input type="text" name="email" placeholder="Email Address"><br>
-		 		<input type="text" name="fb" placeholder="Facebook Account">
+		 		<textarea type="text" name="address" placeholder="Home Address"
+				value = ""><?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][9]))
+				{ echo $_SESSION['return'][9]; }  ?></textarea>
+		 		<input type="text" name="nation" placeholder="Nationality"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][10]))
+				{ echo $_SESSION['return'][10]; }  ?>"><br>
+		 		<input type="text" name="cnum" placeholder="Contact Number"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][11]))
+				{ echo $_SESSION['return'][11]; }  ?>"><br>
+		 		<input type="text" name="email" placeholder="Email Address"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][12]))
+				{ echo $_SESSION['return'][12]; }  ?>"><br>
+		 		<input type="text" name="fb" placeholder="Facebook Account"
+				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][13]))
+				{ echo $_SESSION['return'][13]; }  ?>">
 				</td>
 			</tr>
 			</table>
@@ -79,27 +130,50 @@ else{
 		</tr>
 		<tr heigth="200px">
 		 <td width="50%">
-	 		<input type="text" name="edlvl" placeholder="Educational Level"><br>
-	 		<input type="text" name="school" placeholder="School Name"><br>
+	 		<input type="text" name="edlvl" placeholder="Educational Level"
+			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+			&& isset($_SESSION['return'][14]))
+			{ echo $_SESSION['return'][14]; }  ?>"><br>
+	 		<input type="text" name="school" placeholder="School Name"
+			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+			&& isset($_SESSION['return'][15]))
+			{ echo $_SESSION['return'][15]; }  ?>"><br>
 	 		<label>Year Graduated </label>
 	 		<select name="g-yr">
+				<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+				&& isset($_SESSION['return'][16]))
+				{ echo '<option>'.$_SESSION['return'][16].'</option>'; }  ?>
 		 			<?php for ($i=1945; $i <= 2016; $i++) {
 		 				echo '<option>'.$i.'</option>';
 		 			} ?>
 		 		</select>
-	 		<input type="text" name="award" placeholder="Award Received">
+	 		<input type="text" name="award" placeholder="Award Received"
+			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+			&& isset($_SESSION['return'][17]))
+			{ echo $_SESSION['return'][17]; }  ?>">
 		 </td>
 
 		 <td width="50%" valign="top" style="padding-left: 20px; !important">
-	 		<input type="text" name="company" placeholder="Company name"><br>
+	 		<input type="text" name="company" placeholder="Company name"
+			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+			&& isset($_SESSION['return'][18]))
+			{ echo $_SESSION['return'][18]; }  ?>"><br>
 	 		<table>
 	 		<tr>
 	 			<td><label>Date Started: </label></td>
-	 			<td style="padding-left: 10px;"><input type="Date" name="sdate" placeholder="Date started"></td>
+	 			<td style="padding-left: 10px;">
+					<input type="Date" name="sdate" placeholder="Date started"
+					value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+					&& isset($_SESSION['return'][19]))
+					{ echo $_SESSION['return'][19]; }  ?>"></td>
 	 		</tr>
 	 		<tr>
 	 			<td><label>Date Ended: </label></td>
-	 			<td style="padding-left: 10px;"><input type="Date" name="edate" placeholder="Date ended"></td>
+	 			<td style="padding-left: 10px;">
+					<input type="Date" name="edate" placeholder="Date ended"
+					value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+					&& isset($_SESSION['return'][20]))
+					{ echo $_SESSION['return'][20]; }  ?>"></td>
 	 		</tr>
 	 		</table>
 		 </td>
@@ -110,8 +184,15 @@ else{
 		 <tr>
 		  <td width="50%">
 	 		<h3>Certificates and Trainings</h3>
-	 		<input type="text" name="train" placeholder="Name of Training"><br>
-	 		<label>Training Date </label><input type="date" name="dtrain" placeholder="Date of Training">
+	 		<input type="text" name="train" placeholder="Name of Training"
+			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+			&& isset($_SESSION['return'][21]))
+			{ echo $_SESSION['return'][21]; }  ?>"><br>
+	 		<label>Training Date </label>
+			<input type="date" name="dtrain" placeholder="Date of Training"
+			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
+			&& isset($_SESSION['return'][22]))
+			{ echo $_SESSION['return'][22]; }  ?>">
 		  </td>
 
 		  <td width="50%" valign="bottom" align="center" style="padding-left: 20px; !important">
@@ -121,6 +202,7 @@ else{
 		</table>
 
 	 	</form>
+
 	 	<div class="error" style="opacity: <?php echo $opacity; ?>">
 	 		<p>
 	 		<?php
@@ -131,6 +213,11 @@ else{
 	 		?>
 	 		</p>
 	 	</div>
+
+		<div class="logout">
+			<a href="destroy.php">Logout</a>
+		</div>
+
 	</div>
 
 </body>
