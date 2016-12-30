@@ -3,6 +3,7 @@
 session_start();
 $arr = []; // for user interface error log
 $err = []; // for input box error color
+$err_s = []; // for select box error color
 $re = []; //for filling-up form with previous inputs
 
 if(isset($_POST['submit'])){
@@ -20,7 +21,8 @@ if(isset($_POST['submit'])){
 	$re[] = $address = $_POST['address'];
 	$re[] = $nation = $_POST['nation'];
 	$re[] = $cnum = $_POST['cnum'];
-  	$re[] = $fb = $_POST['fb'];
+	$re[] = $email = $_POST['email'];
+  $re[] = $fb = $_POST['fb'];
 	$re[] = $edlvl = $_POST['edlvl'];
 	$re[] = $school = $_POST['school'];
 	$re[] = $gyr = $_POST['g-yr'];
@@ -30,11 +32,13 @@ if(isset($_POST['submit'])){
 	$re[] = $edate = $_POST['edate'];
 	$re[] = $train = $_POST['train'];
 	$re[] = $dtrain = $_POST['dtrain'];
-	$re[] = $email = $_POST['email'];
 
-//set date for validation
+//convert month from word to number for validation
   $bmonth = $bmonth.'-'.$byr;
 	$bmonth = date('m', strtotime($bmonth));
+		echo $bmonth.'<br>';
+		echo $bdate.'<br>';
+		echo $byr;
 
 //Lastname validation
 	if(strlen($lname) < 1){
@@ -42,7 +46,7 @@ if(isset($_POST['submit'])){
 		$err[] = "lname";
 	}
 	elseif(checkname($lname)){
-		$arr[] = "Invalid Last Name: Type a name correctly";
+		$arr[] = "Invalid Last Name: Type a name correctly!";
 		$err[] = "lname";
 	}
 
@@ -52,39 +56,106 @@ if(isset($_POST['submit'])){
 			$err[] = "gname";
 		}
 		elseif(checkname($gname)){
-			$arr[] = "Invalid Given Name: Type a name correctly";
-			$err[] = "lname";
+			$arr[] = "Invalid Given Name: Type a name correctly!";
+			$err[] = "gname";
 		}
 
 //Middle name validation
-	if(!isset($mname)){
+	if(strlen($mname) < 1){
 		$arr[] = "Middle Name Required!";
 		$err[] = "mname";
 	}
 	elseif(checkname($mname)){
-		$arr[] = "Invalid Middle Name: Type a name correctly";
+		$arr[] = "Invalid Middle Name: Type a name correctly!";
 		$err[] = "mname";
 	}
 
 //Birth Date Validation
-	if(!checkdate($bmonth, $bdate, $byr)){
-		$arr[] = "Invalid Birth Date";
-		$err[] = "B-date";
-		$err[] = "B-month";
-		$err[] = "B-yr";
+if(strlen($bmonth) < 2 && strlen($bdate) < 2 && strlen($byr) < 4){
+	if(strlen($bmonth) < 2){
+		$arr[] = "Birhtdate Month required!";
+		$err_s = "b-month";
+	}
+	if(strlen($bdate) < 2){
+		$arr[] = "Birth Date required!";
+		$err_s = "b-date";
+	}
+	if(strlen($byr) < 4){
+		$arr[] = "Birthdate Year required!";
+		$err_s = "b-yr";
+	}
+} elseif(!checkdate($bmonth, $bdate, $byr)){
+		$arr[] = "Invalid Birth Date!";
+		$err_s[] = "b-date";
+		$err_s[] = "b-month";
+		$err_s[] = "b-yr";
 	}
 
+//Marital Status Validation
+ if(strlen($mstatus) < 6){
+	 $arr[] = "Civil Status required!";
+	 $err_s[] = "mstatus";
+ }
+
+//Fathers Name Validation
+if(!isset($dad)){
+	$arr[] = "Fathers Name required!";
+	$err[] = "dad";
+}
+elseif(checkname($dad)){
+	$arr[] = "Invalid Fathers Name!";
+	$err[] = "dad";
+}
+
+//Mothers Name Validation
+if(!isset($mom)){
+	$arr[] = "Mothers Name Required!";
+	$err[] = "mom";
+}
+elseif(checkname($mom)){
+	$arr[] = "Invalid Mothers Name!";
+	$err[] = "mom";
+}
+
+//Home Address Validation
+if(!isset($address)){
+	$arr[] = "Home Address Required!";
+	$_SESSION['texterr'] = "address";
+}
+elseif(strlen($address) < 5){
+	$arr[] = "Invalid Home Address!";
+	$_SESSION['texterr'] = "address";
+}
+
+//Nationality Validation
+if(!isset($nation)){
+	$arr[] = "Nationality Required!";
+	$err[] = "nation";
+}
+elseif(strlen($nation) < 5){
+	$arr[] = "Invalid Nationality!";
+	$err[] = "nation";
+}
+
 // Mobile Number Validation
-  if(!preg_match('/\d/', $cnum) || is_numeric($cnum)){
+if(!isset($cnum)){
+	$arr[] = "Mobile Number Required";
+	$err[] = "cnum";
+}
+elseif(!preg_match('/\d/', $cnum) || is_numeric($cnum)){
 		$arr[] = "Invalid Mobile Number";
 		$err[] = "cnum";
 	}
 
 //Email Validation
-	if(!filter_var($email, FILTER_VALIDATE_INT)){
-		$arr[] = "Invalid Email";
-		$err[] = "email";
-	}
+if(!isset($email)){
+	$arr[] = "Email Required";
+	$err[] = "email";
+}
+elseif(!filter_var($email, FILTER_VALIDATE_INT)){
+	$arr[] = "Invalid Email";
+	$err[] = "email";
+}
 
 }
 
@@ -102,8 +173,9 @@ function checkname($var){
 	}
 }
 
-$_SESSION['return'] = $re;
-$_SESSION['errorlog'] = $arr;
-
+print_r ($_SESSION['return'] = $re);
+print_r ($_SESSION['errorlog'] = $arr);
+print_r ($_SESSION['input'] = $err);
+print_r ($_SESSION['select'] = $err_s);
 header('Location: index.php');
  ?>
