@@ -140,3 +140,25 @@ table tr td{
 	background-color: #F1948A;
 	color: white;
 }
+.content{
+	padding: 20px 70px;
+}
+.content h4{
+	text-align: justify;
+}
+.again{
+	display: block;
+	margin: 0 auto;
+	padding: 5px 10px;
+	font-size: 20px;
+	background-color: white;
+	color: red;
+	border: 1px solid red;
+	text-decoration: none;
+	width: 150px;
+	text-align: center;
+}
+.again:hover{
+	background-color: red;
+	color: white;
+}

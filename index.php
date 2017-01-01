@@ -1,7 +1,8 @@
 
 <?php
 session_start();
-// for return value
+
+// for return value in each fields
 if(isset($_SESSION['sub'])){
 	if($_SESSION['sub'] == 1 && isset($_SESSION['return'])){
 		$_SESSION['return'];
@@ -11,7 +12,8 @@ if(isset($_SESSION['sub'])){
 	}
 }
 
-$n = 1; // for error logs
+$n = 1; // for error log
+// for error log red box
 if(isset($_SESSION['errorlog'])){
 	$opacity = 1;
 }
@@ -116,7 +118,7 @@ else{
 				&& isset($_SESSION['return'][10]))
 				{ echo $_SESSION['return'][10]; }  ?>"><br>
 
-		 		<input type="text" name="cnum" placeholder="Contact Number"
+		 		<input type="text" name="cnum" placeholder="Contact Number ex. 0907..."
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][11]))
 				{ echo $_SESSION['return'][11]; }  ?>"><br>
