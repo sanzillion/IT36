@@ -198,18 +198,46 @@ if(empty($edlvl) || checkname($edlvl)){
 	$errorcount++;
 }
 
-//School Name
+//School Name Validation
 if(empty($school) || preg_match("/[^a-zA-Z\s\.\-]/", $school)){
 	$arr[] = "School Required or Invalid School Name";
 	$err[] = "school";
 	$errorcount++;
 }
 
-// select drop down year graduated
+// select drop down year graduated Validation
 if(empty($gyr) || strlen($gyr) < 4){
 	$arr[] = "Year Graduated Required";
 	$err_s[] = "g-yr";
 	$errorcount++;
+}
+elseif(($gyr - $byr) < 5 && ($gyr - $byr) > -1){
+	$arr[] = "Did you graduate from school when you were just milking your mom?";
+	$err_s[] = "g-yr";
+	$err_s[] = "b-yr";
+	$errorcount++;
+}
+elseif($byr > $gyr){
+	$arr[] = "Did you graduate from any school when you were just a sperm?";
+	$err_s[] = "g-yr";
+	$err_s[] = "b-yr";
+	$errorcount++;
+}
+else{
+	$empdatey = date('Y', strtotime($sdate));
+	$tdatey = date('Y', strtotime($dtrain));
+	if($byr >= $empdatey && ($empdate - $byr) < 7 ){
+		$arr[] = "Employment or Birthyear Invalid! Not possible!";
+		$err_s[] = "b-yr";
+		$err[] = "sdate";
+		$errorcount++;
+	}
+	elseif($byr >= $tdatey && ($tdatey - $byr) < 7){
+		$arr[] = "Training or Birthyear Invalid! Not plausible!";
+		$err_s[] = "b-yr";
+		$err[] = "dtrain";
+		$errorcount++;
+	}
 }
 
 //Award Received Validation
@@ -230,14 +258,16 @@ if(empty($company) || preg_match("/[^a-zA-Z\s\d\.\-]/",$company)){
 if(empty($sdate)){
 	$arr[] = "Employment Start Date is required!";
 	$err[] = "sdate";
+	$errorcount++;
 }
 else{
-	echo $sdatem = date('m', strtotime($sdate));
-	echo $sdated = date('d', strtotime($sdate));
-	echo $sdatey = date('Y', strtotime($sdate));
+	$sdatem = date('m', strtotime($sdate));
+	$sdated = date('d', strtotime($sdate));
+	$sdatey = date('Y', strtotime($sdate));
 	if(!checkdate($sdatem, $sdated, $sdatey)){
 		$arr[] = "Employment Start Date is an invalid Date";
 		$err[] = "sdate";
+		$errorcount++;
 	}
 }
 
@@ -245,14 +275,30 @@ else{
 if(empty($edate)){
 	$arr[] = "Employment End Date is required!";
 	$err[] = "edate";
+	$errorcount++;
 }
 else{
-	echo $edatem = date('m', strtotime($edate));
-	echo $edated = date('d', strtotime($edate));
-	echo $edatey = date('Y', strtotime($edate));
+	$edatem = date('m', strtotime($edate));
+	$edated = date('d', strtotime($edate));
+	$edatey = date('Y', strtotime($edate));
 	if(!checkdate($edatem, $edated, $edatey)){
 		$arr[] = "Employment End Date is an invalid Date";
 		$err[] = "edate";
+		$errorcount++;
+	}
+}
+
+//Start and End date evaluation
+if(empty($sdate) && empty($edate)){
+	$arr[] = "Start date and end date required!";
+	$errorcount++;
+}
+else{
+	if(check2dates($sdate,$edate)){
+		$arr[] = "Start date should be earlier than end date!";
+		$err[] = "edate";
+		$err[] = "sdate";
+		$errorcount++;
 	}
 }
 
@@ -267,17 +313,18 @@ if(empty($train) || preg_match("/[^a-zA-Z\s\d\.\-]/",$train)){
 if(empty($dtrain)){
 	$arr[] = "Training Date is required!";
 	$err[] = "dtrain";
+	$errorcount++;
 }
 else{
-	echo $dtrainm = date('m', strtotime($dtrain));
-	echo $dtraind = date('d', strtotime($dtrain));
-	echo $dtrainy = date('Y', strtotime($dtrain));
+	$dtrainm = date('m', strtotime($dtrain));
+	$dtraind = date('d', strtotime($dtrain));
+	$dtrainy = date('Y', strtotime($dtrain));
 	if(!checkdate($dtrainm, $dtraind, $dtrainy)){
 		$arr[] = "Training Date is an invalid Date";
 		$err[] = "dtrain";
+		$errorcount++;
 	}
 }
-
 
 $_SESSION['return'] = $re;
 $_SESSION['errorlog'] = $arr;
@@ -312,7 +359,7 @@ $_SESSION['fullname'] = $gname.' '.$mname.' '.$lname;
 
 		header('Location: output.php');
 	}
-}
+ }
 
  function checkname($var){
 	 if(preg_match("/[^a-zA-Z\s]/", $var)
@@ -325,9 +372,38 @@ $_SESSION['fullname'] = $gname.' '.$mname.' '.$lname;
 			}
  }
 
-
-
-
-
+ function check2dates($sdate,$edate){
+	$sdatem = date('m', strtotime($sdate));
+ 	$sdated = date('d', strtotime($sdate));
+ 	$sdatey = date('Y', strtotime($sdate));
+	$edatem = date('m', strtotime($edate));
+	$edated = date('d', strtotime($edate));
+	$edatey = date('Y', strtotime($edate));
+	if($sdatey == $edatey){
+		if($sdatem == $edatem){
+			if($sdated == $edated){
+				return true; //invalid date
+			}
+			elseif($sdated > $edated){
+				return true; //invalid date
+			}
+			else{
+				return false; //valid date
+			}
+		}
+		elseif($sdatem > $edatem){
+			return true; //invalid date
+		}
+		else{
+			return false; //valid date
+		}
+	}
+	elseif($sdatey > $edatey){
+		return true; //invalid date
+	}
+	else{
+		return false; //valid date
+	}
+ }
 
  ?>
