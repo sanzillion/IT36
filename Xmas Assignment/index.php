@@ -40,20 +40,20 @@ else{
 			<table>
 			<tr align="">
 				<td width="50%">
-				<input type="text" name="lname" placeholder="Last Name"
+				<input required type="text" name="lname" placeholder="Last Name"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][0]))
 				{ echo $_SESSION['return'][0]; }  ?>"><br>
-		 		<input type="text" name="gname" placeholder="Given Name"
+		 		<input required type="text" name="gname" placeholder="Given Name"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][1]))
 				{ echo $_SESSION['return'][1]; }  ?>"><br>
-		 		<input type="text" name="mname" placeholder="Middle name"
+		 		<input required type="text" name="mname" placeholder="Middle name"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][2]))
 				{ echo $_SESSION['return'][2]; }  ?>"><br>
 		 		<label>Birthdate</label>
-		 		<select name="b-month">
+		 		<select require name="b-month">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][3]))
 					{ echo '<option>'.$_SESSION['return'][3].'</option>'; }
@@ -65,7 +65,7 @@ else{
 		 			<option>Sep</option><option>Oct</option>
 		 			<option>Nov</option><option>Dec</option>
 		 		</select>
-		 		<select name="b-date">
+		 		<select require name="b-date">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][4]))
 					{ echo '<option>'.$_SESSION['return'][4].'</option>'; }
@@ -73,7 +73,7 @@ else{
 		 			 for ($i= 1; $i <= 31; $i++) {
 		 				echo '<option>'.$i.'</option>';	} ?>
 		 		</select>
-		 		<select name="b-yr">
+		 		<select require name="b-yr">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][5]))
 					{ echo '<option>'.$_SESSION['return'][5].'</option>'; }
@@ -83,7 +83,7 @@ else{
 		 			} ?>
 		 		</select> <br>
 		 		<label>Civil Status</label>
-		 		<select name="mstatus">
+		 		<select require name="mstatus">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][6]))
 					{ echo '<option>'.$_SESSION['return'][6].'</option>'; }
@@ -94,11 +94,11 @@ else{
 		 			<option>Divorced</option>
 		 			<option>Widowed</option>
 		 		</select><br>
-		 		<input type="text" name="dad" placeholder="Father's Name"
+		 		<input required type="text" name="dad" placeholder="Father's Name"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][7]))
 				{ echo $_SESSION['return'][7]; }  ?>"><br>
-		 		<input type="text" name="mom" placeholder="Mother's Name"
+		 		<input required type="text" name="mom" placeholder="Mother's Name"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][8]))
 				{ echo $_SESSION['return'][8]; }  ?>"><br>
@@ -106,29 +106,29 @@ else{
 
 				<td width="50%" style="padding-left: 20px; !important">
 
-		 		<textarea type="text" name="address" placeholder="Home Address"
+		 		<textarea required type="text" name="address" placeholder="Home Address"
 				<?php if(isset($_SESSION['texterr'])){
 					echo "style=\"border-color: #E74C3C !important;\"";
 				} ?>><?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][9]))
 				{ echo $_SESSION['return'][9]; }  ?></textarea>
 
-		 		<input type="text" name="nation" placeholder="Nationality"
+		 		<input required type="text" name="nation" placeholder="Nationality"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][10]))
 				{ echo $_SESSION['return'][10]; }  ?>"><br>
 
-		 		<input type="text" name="cnum" placeholder="Contact Number ex. 0907..."
+		 		<input required type="text" name="cnum" placeholder="Contact Number ex. 0907..."
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][11]))
 				{ echo $_SESSION['return'][11]; }  ?>"><br>
 
-		 		<input type="text" name="email" placeholder="Email Address"
+		 		<input required type="text" name="email" placeholder="Email Address"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][12]))
 				{ echo $_SESSION['return'][12]; }  ?>"><br>
 
-		 		<input type="text" name="fb" placeholder="Facebook Account"
+		 		<input required type="text" name="fb" placeholder="Facebook Account"
 				value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][13]))
 				{ echo $_SESSION['return'][13]; }  ?>">
@@ -143,16 +143,16 @@ else{
 		</tr>
 		<tr heigth="200px">
 		 <td width="50%">
-	 		<input type="text" name="edlvl" placeholder="Educational Level"
+	 		<input required type="text" name="edlvl" placeholder="Educational Level"
 			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 			&& isset($_SESSION['return'][14]))
 			{ echo $_SESSION['return'][14]; }  ?>"><br>
-	 		<input type="text" name="school" placeholder="School Name"
+	 		<input required type="text" name="school" placeholder="School Name"
 			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 			&& isset($_SESSION['return'][15]))
 			{ echo $_SESSION['return'][15]; }  ?>"><br>
 	 		<label>Year Graduated </label>
-	 		<select name="g-yr">
+	 		<select require name="g-yr">
 				<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][16]))
 				{ echo '<option>'.$_SESSION['return'][16].'</option>'; }
@@ -161,14 +161,14 @@ else{
 		 				echo '<option>'.$i.'</option>';
 		 			} ?>
 		 		</select>
-	 		<input type="text" name="award" placeholder="Award Received"
+	 		<input required type="text" name="award" placeholder="Award Received"
 			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 			&& isset($_SESSION['return'][17]))
 			{ echo $_SESSION['return'][17]; }  ?>">
 		 </td>
 
 		 <td width="50%" valign="top" style="padding-left: 20px; !important">
-	 		<input type="text" name="company" placeholder="Company name"
+	 		<input required type="text" name="company" placeholder="Company name"
 			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 			&& isset($_SESSION['return'][18]))
 			{ echo $_SESSION['return'][18]; }  ?>"><br>
@@ -176,7 +176,7 @@ else{
 	 		<tr>
 	 			<td><label>Date Started: </label></td>
 	 			<td style="padding-left: 10px;">
-					<input type="Date" name="sdate" placeholder="dd/mm/yyyy"
+					<input required type="Date" name="sdate" placeholder="dd/mm/yyyy"
 					value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][19]))
 					{ echo $_SESSION['return'][19]; }  ?>"></td>
@@ -184,7 +184,7 @@ else{
 	 		<tr>
 	 			<td><label>Date Ended: </label></td>
 	 			<td style="padding-left: 10px;">
-					<input type="Date" name="edate" placeholder="dd/mm/yyyy"
+					<input required type="Date" name="edate" placeholder="dd/mm/yyyy"
 					value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][20]))
 					{ echo $_SESSION['return'][20]; }  ?>"></td>
@@ -198,19 +198,19 @@ else{
 		 <tr>
 		  <td width="50%">
 	 		<h3>Certificates and Trainings</h3>
-	 		<input type="text" name="train" placeholder="Name of Training"
+	 		<input required type="text" name="train" placeholder="Name of Training"
 			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 			&& isset($_SESSION['return'][21]))
 			{ echo $_SESSION['return'][21]; }  ?>"><br>
 	 		<label>Training Date </label>
-			<input type="date" name="dtrain" placeholder="dd/mm/yyyy"
+			<input required type="date" name="dtrain" placeholder="dd/mm/yyyy"
 			value = "<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 			&& isset($_SESSION['return'][22]))
 			{ echo $_SESSION['return'][22]; }  ?>">
 		  </td>
 
 		  <td width="50%" valign="bottom" align="center" style="padding-left: 20px; !important">
-			<input type="submit" name="submit" value="Submit Form">
+			<input required type="submit" name="submit" value="Submit Form">
 		  </td>
 		 </tr>
 		</table>
