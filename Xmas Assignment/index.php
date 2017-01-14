@@ -53,7 +53,7 @@ else{
 				&& isset($_SESSION['return'][2]))
 				{ echo $_SESSION['return'][2]; }  ?>"><br>
 		 		<label>Birthdate</label>
-		 		<select require name="b-month">
+		 		<select required name="b-month">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][3]))
 					{ echo '<option>'.$_SESSION['return'][3].'</option>'; }
@@ -65,7 +65,7 @@ else{
 		 			<option>Sep</option><option>Oct</option>
 		 			<option>Nov</option><option>Dec</option>
 		 		</select>
-		 		<select require name="b-date">
+		 		<select required name="b-date">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][4]))
 					{ echo '<option>'.$_SESSION['return'][4].'</option>'; }
@@ -73,7 +73,7 @@ else{
 		 			 for ($i= 1; $i <= 31; $i++) {
 		 				echo '<option>'.$i.'</option>';	} ?>
 		 		</select>
-		 		<select require name="b-yr">
+		 		<select required name="b-yr">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][5]))
 					{ echo '<option>'.$_SESSION['return'][5].'</option>'; }
@@ -83,7 +83,7 @@ else{
 		 			} ?>
 		 		</select> <br>
 		 		<label>Civil Status</label>
-		 		<select require name="mstatus">
+		 		<select required name="mstatus">
 					<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 					&& isset($_SESSION['return'][6]))
 					{ echo '<option>'.$_SESSION['return'][6].'</option>'; }
@@ -152,7 +152,7 @@ else{
 			&& isset($_SESSION['return'][15]))
 			{ echo $_SESSION['return'][15]; }  ?>"><br>
 	 		<label>Year Graduated </label>
-	 		<select require name="g-yr">
+	 		<select required name="g-yr">
 				<?php if(isset($_SESSION['sub']) && $_SESSION['sub'] == 1
 				&& isset($_SESSION['return'][16]))
 				{ echo '<option>'.$_SESSION['return'][16].'</option>'; }
